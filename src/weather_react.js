@@ -1,12 +1,25 @@
 import React, {useState} from "react"
+import { FidgetSpinner } from  'react-loader-spinner'
 import axios from "axios"
 import './weather.css'
-    
+ 
+<FidgetSpinner
+  visible={true}
+  height="80"
+  width="80"
+  ariaLabel="dna-loading"
+  wrapperStyle={{}}
+  wrapperClass="dna-wrapper"
+  ballColors={['#ff0000', '#00ff00', '#0000ff']}
+  backgroundColor="#F4442E"
+/> 
+
 export default function Weather(){
     let [city, setCity] = useState(" ");
     let [message, setMessage] = useState(false);
     let [weather, setWeather] = useState ({});
 
+ 
 
     /* Search machine*/
     function showWeather (response){
@@ -24,7 +37,7 @@ export default function Weather(){
         
 
         function SearchButoom(event){
-            event.preventDefult();
+            event.preventDefault();
             let apiKey = "c409940fd7208150de003ea7999c3e64";
              let url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
             axios.get(url).then(showWeather);
@@ -67,7 +80,7 @@ export default function Weather(){
                         <div className="overwiev"> {form}
                             <h1>{city}</h1>
                             <ul>
-                                <li> Temperature: {weather.temperature} °С</li>
+                                <li> Temperature: {Math.round (weather.temperature)} °С</li>
                                 <li> Humidity: {weather.humidity} % </li>
                                 <li> Wind: {weather.wind} km/s</li>
                                 <li> Description: {weather.description} </li>
@@ -75,7 +88,18 @@ export default function Weather(){
                             </ul>
                         </div>
                     )} else {
-                        return form
+                        return (
+                            <div className="overwiev"> {form}
+                            <h1>Loading... <FidgetSpinner /> </h1>
+                            <ul>
+                                <li> Temperature: Loading... °С</li>
+                                <li> Humidity: Loading... % </li>
+                                <li> Wind: Loading...  km/s</li>
+                                <li> Description: Loading... </li>
+                                 
+                            </ul>
+                        </div>
+                        )
                     }  
 
 }
