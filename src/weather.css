@@ -1,0 +1,18 @@
+body {
+    font-family: sans-serif;
+    padding: 0 20px;
+  }
+.serch_form {
+    width: auto;
+}
+.search_button{
+width: 150px;
+}
+
+.oweriev {
+    margin-top: 20px;
+  }
+
+  .oweriev li {
+    list-style: none;
+  }
